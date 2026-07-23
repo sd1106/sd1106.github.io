@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreyansh Dubey | Portfolio</title>
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Shreyansh Dubey | AI & Computer Science Portfolio">
+    <meta property="og:description" content="Currently studying Artificial Intelligence at Purdue University. Building systems designed for adaptability and ethics.">
+    <meta property="og:image" content="https://sd1106.github.io/Picture1.png">
+    <meta property="og:url" content="https://sd1106.github.io/">
+    <meta property="og:type" content="website">    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #070707;
+            --bg-gradient: radial-gradient(circle at top left, #1f1b00, #070707 40%);
+            --surface: rgba(20, 20, 20, 0.7);
+            --surface-card: rgba(26, 26, 26, 0.6);
+            --primary: #FFD100; 
+            --primary-glow: rgba(255, 209, 0, 0.4);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 209, 0, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- Background Logos / Watermarks --- */
+        .bg-watermarks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* Prevents logos from blocking clicks */
+            z-index: -1; /* Keeps them behind all content */
+            overflow: hidden;
+        }
+        
+        .watermark {
+            position: absolute;
+            opacity: 0.1; /* Extremely subtle opacity */
+            filter: grayscale(100%) contrast(120%);
+            transition: opacity 0.5s ease;
+        }
+
+        .watermark-sbhs {
+            top: -5%;
+            left: -10%;
+            width: 50vw;
+            min-width: 400px;
+            transform: rotate(-10deg);
+        }
+
+        .watermark-purdue {
+            bottom: -10%;
+            right: -10%;
+            width: 60vw;
+            min-width: 500px;
+            transform: rotate(5deg);
+        }
+        /* ------------------------------------- */
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(7, 7, 7, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-logo { font-weight: 800; font-size: 1.2rem; color: var(--text-main); text-decoration: none; }
+        .nav-logo span { color: var(--primary); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        h1, h2, h3 { font-weight: 800; line-height: 1.2; }
+        h2 { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 1.5rem; }
+        .highlight { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
+
+        section { padding: 120px 5%; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+        
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* Hero Section */
+        .hero { min-height: 100vh; display: flex; align-items: center; position: relative; padding-top: 150px; }
+        .hero-layout { display: flex; align-items: center; gap: 60px; flex-wrap: wrap-reverse; width: 100%; }
+        .hero-text { flex: 1; min-width: 320px; }
+        .hero-image-wrapper { flex-shrink: 0; margin: 0 auto; }
+        .hero-img { 
+            width: 320px; height: 400px; object-fit: cover; 
+            border-radius: 20px; border: 2px solid var(--primary); 
+            box-shadow: 0 0 40px var(--primary-glow); 
+            animation: float 5s ease-in-out infinite;
+        }
+
+        .hero h1 { font-size: clamp(3.5rem, 8vw, 6rem); margin-bottom: 1.5rem; letter-spacing: -2px; }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 650px; margin-bottom: 2.5rem; }
+        
+        /* Enlarged Prominent Stats Container */
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 2.5rem;
+        }
+        .stat-box {
+            background: rgba(255, 209, 0, 0.05);
+            border: 1px solid var(--primary);
+            padding: 15px 25px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 8px 25px rgba(255, 209, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        .stat-box span {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+        .stat-box strong {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        /* Split Content */
+        .split-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 40px; }
+        .split-text p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+        @media (max-width: 850px) { .split-content { grid-template-columns: 1fr; } }
+
+        /* Projects Grid */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
+        .project-card { 
+            background: var(--surface-card); border-radius: 16px; padding: 40px; 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
+            border: 1px solid var(--border); position: relative; overflow: hidden;
+            backdrop-filter: blur(5px); display: flex; flex-direction: column;
+        }
+        .project-card::before { 
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--primary-glow), transparent 40%); 
+            opacity: 0; transition: opacity 0.4s ease; pointer-events: none; z-index: 0;
+        }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 20px 40px rgba(0,0,0,0.8), 0 0 20px var(--primary-glow); }
+        .project-card:hover::before { opacity: 0.15; }
+        
+        .project-card > * { position: relative; z-index: 1; }
+        .project-icon { font-size: 2.5rem; margin-bottom: 20px; color: var(--primary); }
+        .project-card h3 { font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .project-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+        
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+        .tag { background: rgba(255, 209, 0, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; border: 1px solid var(--border); letter-spacing: 0.5px; text-transform: uppercase; }
+
+        /* HS Badge Style */
+        .badge-hs {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            vertical-align: middle;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Skills Section */
+        .skills-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
+        .skill-item { background: var(--surface); border: 1px solid var(--border); padding: 12px 20px; border-radius: 8px; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
+        .skill-item i { color: var(--primary); }
+
+        /* Timeline / Honors */
+        .timeline { position: relative; max-width: 900px; margin: 40px auto 0; padding-left: 30px; border-left: 2px solid var(--border); }
+        .timeline-item { position: relative; margin-bottom: 50px; padding-left: 30px; }
+        .timeline-item::before { 
+            content: ''; position: absolute; left: -37px; top: 5px; width: 12px; height: 12px; 
+            border-radius: 50%; background: var(--bg-dark); border: 3px solid var(--primary); 
+            box-sizing: content-box; transition: all 0.3s ease; 
+        }
+        .timeline-item:hover::before { background: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+        .timeline-item h4 { font-size: 1.4rem; margin-bottom: 12px; color: var(--text-main); }
+        .timeline-item p { color: var(--text-muted); font-size: 1rem; margin-bottom: 10px; }
+        
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .award-box {
+            background: var(--surface-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+        .award-box:hover {
+            border-color: rgba(255, 209, 0, 0.3);
+            background: rgba(255, 209, 0, 0.02);
+            transform: translateX(5px);
+        }
+        .award-box i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-top: 4px;
+        }
+        .award-info h5 {
+            color: var(--text-main);
+            font-size: 1rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .award-info p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Footer */
+        footer { position: relative; z-index: 1; text-align: center; padding: 60px 5%; border-top: 1px solid var(--border); margin-top: 80px; }
+        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
+        .social-links a { color: var(--text-muted); font-size: 1.5rem; transition: all 0.3s ease; }
+        .social-links a:hover { color: var(--primary); transform: translateY(-3px); }
+        footer p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 6px; border: 3px solid var(--bg-dark); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+    </style>
+</head>
+<body>
+
+    <!-- Background Watermarks -->
+    <div class="bg-watermarks">
+        <img src="sbhs-logo.png" alt="South Brunswick High School" class="watermark watermark-sbhs">
+        <img src="purdue-logo.png" alt="Purdue University" class="watermark watermark-purdue">
+    </div>
+
+    <nav>
+        <a href="#" class="nav-logo">Shreyansh<span>.</span></a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Work</a>
+            <a href="#skills">Skills</a>
+            <a href="#milestones">Timeline</a>
+        </div>
+    </nav>
+
+    <section class="hero reveal">
+        <div class="hero-layout">
+            <div class="hero-text">
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <span>University</span>
+                        <strong>Purdue (Class of '30)</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span>South Brunswick HS GPA</span>
+                        <strong>4.3522 / 4.0</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span>SAT Score</span>
+                        <strong>1540</strong>
+                    </div>
+                    <div class="stat-box">
+                        <span>PSAT/NMSQT Standing</span>
+                        <strong>National Merit Commended 2026</strong>
+                    </div>
+                </div>
+                <h1>Shreyansh <br><span class="highlight">Dubey.</span></h1>
+                <p>Currently studying Artificial Intelligence at Purdue University through the John Martinson Honors College. Building computer science and AI systems designed for adaptability and ethics—engineering <strong>empathy made systematic.</strong></p>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="Picture1.png" alt="Shreyansh Dubey" class="hero-img">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="split-content reveal">
+        <div class="split-text">
+            <h2>The "Other 6%"</h2>
+            <p>During my time building a highly accurate IT support chatbot, I realized something critical: building systems that work 94% of the time isn't enough. It's about what happens in the margins—the edge cases, the biases, the unexpected human elements.</p>
+            <p>This perspective was deeply shaped by my younger brother, Shreshth, who has experienced speech and cognitive delays since undergoing brain surgery at age one. For years, I sat beside him through dozens of  exercises and rigorous therapy programs, and learned that progress is anything but linear. It requires patience, constant iteration, and tools that mold to the user, not the other way around. I don't just want to build things that mostly work; I want to understand why they fail, fix them, and design human-centered technology that genuinely cares.</p>
+        </div>
+        <div class="visual-container" style="background: linear-gradient(135deg, var(--surface-card), rgba(0,0,0,0.8)); border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), inset 0 0 0 1px var(--border); display: flex; align-items: center; justify-content: center; min-height: 350px;">
+            <div style="text-align: center; color: var(--primary); font-weight: 600; padding: 40px;">
+                <i class="fa-solid fa-microchip" style="font-size: 4rem; margin-bottom: 20px; display: block; filter: drop-shadow(0 0 15px var(--primary-glow));"></i>
+                <span>Systems Architecture &amp; Empathy</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="reveal">Applied <span class="highlight">Research &amp; Engineering</span></h2>
+        
+        <div class="projects-grid">
+            <div class="project-card reveal">
+                <i class="fa-solid fa-robot project-icon"></i>
+                <h3>TriSys IT Services Chatbot <span class="badge-hs">HS</span></h3>
+                <p>Designed and deployed a production-grade AI chatbot to automate Tier-1 IT support integrated via Slack. Built a Flask-based REST API and fine-tuned the Gemini API on 100+ anonymized tickets, improving model accuracy from 70% to 95%.</p>
+                <div class="tags">
+                    <span class="tag">AI Software Engineer</span>
+                    <span class="tag">Under 2 Min Response Time</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" style="transition-delay: 100ms;">
+                <i class="fa-solid fa-plane-up project-icon"></i>
+                <h3>MCCC Agricultural Drone <span class="badge-hs">HS</span></h3>
+                <p>Selected as 1 of 2 seniors to engineer a drone combatting blueberry scorch disease. Self-taught Fusion360 generative design to cut the frame weight by 65% (350g to 120g), drastically optimizing battery life.</p>
+                <div class="tags">
+                    <span class="tag">Hardware Optimization</span>
+                    <span class="tag">Fusion360</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" style="transition-delay: 200ms;">
+                <i class="fa-solid fa-file-contract project-icon"></i>
+                <h3>AI &amp; Ethics Research <span class="badge-hs">HS</span></h3>
+                <p>Authored a research paper surveying 668 students on AI in education, mentored by Rutgers Prof. Sonal Pandey. Currently collaborating with Rutgers Prof. Govindaswamy to add econometrics and broaden the scope for undergraduate students.</p>
+                <div class="tags">
+                    <span class="tag">Lead Researcher</span>
+                    <span class="tag">Data Storytelling</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal" style="transition-delay: 300ms;">
+                <i class="fa-solid fa-vr-cardboard project-icon"></i>
+                <h3>AnatomyVR &amp; Startups <span class="badge-hs">HS</span></h3>
+                <p>Collaborated with Prof. Wu at Mercer County Community College to integrate Gemini API conversational AI into a Unity VR tool for real-time student feedback. Co-founded Forge (LLM logistics startup) and SerenityVR (phobia treatment software).</p>
+                <div class="tags">
+                    <span class="tag">Unity VR</span>
+                    <span class="tag">Founder</span>
+                </div>
+            </div>
+            
+            <div class="project-card reveal" style="transition-delay: 400ms;">
+                <i class="fa-solid fa-pen-nib project-icon"></i>
+                <h3>MotionShark UX Research <span class="badge-hs">HS</span></h3>
+                <p>Collaborated with UPenn Computer Science undergraduates to develop an AI-powered SAT prep platform. Provided critical product testing and UX feedback to align the platform with real student needs.</p>
+                <div class="tags">
+                    <span class="tag">UX Researcher</span>
+                    <span class="tag">EdTech</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="reveal">
+        <h2>Technical <span class="highlight">Toolkit</span></h2>
+        <div class="skills-container">
+            <div class="skill-item"><i class="fa-solid fa-code"></i> Languages: Python, Java, C#, HTML</div>
+            <div class="skill-item"><i class="fa-solid fa-brain"></i> AI/ML: LangChain, TensorFlow, PyTorch, Hugging Face, Pandas, NumPy, OpenCV</div>
+            <div class="skill-item"><i class="fa-solid fa-cloud"></i> Web/Cloud: Next.js, React.js, Node.js, Flask, FastAPI, GCP, Firebase</div>
+            <div class="skill-item"><i class="fa-solid fa-cubes"></i> Software/Design: Unity (2D/3D/VR), Fusion360 Generative Design, Git/GitHub</div>
+            <div class="skill-item"><i class="fa-solid fa-language"></i> Bilingual: English, French, Hindi</div>
+        </div>
+    </section>
+
+    <section id="milestones">
+        <h2 class="reveal">Honors &amp; <span class="highlight">Recognition</span></h2>
+        <div class="timeline">
+            
+            <!-- Major Academic Awards -->
+            <div class="timeline-item reveal">
+                <h4>Academic Distinctions</h4>
+                <div class="awards-grid">
+                    <div class="award-box">
+                        <i class="fa-solid fa-medal"></i>
+                        <div class="award-info">
+                            <h5>National Merit Commended Scholar <span class="badge-hs">HS</span></h5>
+                            <p>Recognized nationally for scoring in the top 3% (1490) among 1.5 million PSAT/NMSQT test-takers.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-certificate"></i>
+                        <div class="award-info">
+                            <h5>AP Scholar with Distinction <span class="badge-hs">HS</span></h5>
+                            <p>Awarded by the College Board for scoring an average of 3.5+ on all AP exams taken, with grades of 3+ on five or more exams.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-star"></i>
+                        <div class="award-info">
+                            <h5>High Honor Roll <span class="badge-hs">HS</span></h5>
+                            <p>Maintained consecutive placement on the High Honor Roll across all high school semesters with a 4.3522 GPA.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-university"></i>
+                        <div class="award-info">
+                            <h5>John Martinson Honors College</h5>
+                            <p>Selected for Purdue University's prestigious interdisciplinary honors program for high-achieving undergraduate students.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specialized Programs & Societies -->
+            <div class="timeline-item reveal">
+                <h4>Fellowships &amp; Honor Societies</h4>
+                <div class="awards-grid">
+                    <div class="award-box">
+                        <i class="fa-solid fa-leaf"></i>
+                        <div class="award-info">
+                            <h5>2x Borlaug Scholar <span class="badge-hs">HS</span></h5>
+                            <p>Recognized twice by the World Food Prize Foundation for research in sustainable agricultural technology.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-square-root-variable"></i>
+                        <div class="award-info">
+                            <h5>Rutgers Young Scholars (RYSP) <span class="badge-hs">HS</span></h5>
+                            <p>Accepted with a 50% merit scholarship for an intensive summer program in Discrete Mathematics at Rutgers University.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-landmark"></i>
+                        <div class="award-info">
+                            <h5>National Honor Society <span class="badge-hs">HS</span></h5>
+                            <p>Inducted member recognized for excellence in scholarship, leadership, service, and character.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-microscope"></i>
+                        <div class="award-info">
+                            <h5>Subject Honor Societies <span class="badge-hs">HS</span></h5>
+                            <p>Active inductee in the Computer Science, Science, and English National Honor Societies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competitions -->
+            <div class="timeline-item reveal">
+                <h4>Hackathons &amp; Competitions</h4>
+                <div class="awards-grid">
+                    <div class="award-box">
+                        <i class="fa-solid fa-rocket"></i>
+                        <div class="award-info">
+                            <h5>Lockheed Martin CodeQuest <span class="badge-hs">HS</span></h5>
+                            <p>Placed 2nd out of 25 teams in the Advanced Division algorithmic coding competition.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <div class="award-info">
+                            <h5>Garden State Cyber CTF <span class="badge-hs">HS</span></h5>
+                            <p>Ranked in the top 5 out of 200+ statewide teams in intensive cybersecurity challenges.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-trophy"></i>
+                        <div class="award-info">
+                            <h5>SB Computer Science Hackathon <span class="badge-hs">HS</span></h5>
+                            <p>Secured 1st Place &amp; Runner-Up finishes across multiple iterations of the event.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <div class="award-info">
+                            <h5>2x LaunchX Winner <span class="badge-hs">HS</span></h5>
+                            <p>Awarded top honors twice in the LaunchX high school entrepreneurship and startup pitch competition.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leadership -->
+            <div class="timeline-item reveal">
+                <h4>Leadership &amp; Community Impact</h4>
+                <div class="awards-grid">
+                    <div class="award-box">
+                        <i class="fa-solid fa-hands-holding-circle"></i>
+                        <div class="award-info">
+                            <h5>"Best Emerging School" Award <span class="badge-hs">HS</span></h5>
+                            <p>Won this award and a $1,000 NJ Champion School grant as a Helping Hands Executive Board member for a safe-driving campaign.</p>
+                        </div>
+                    </div>
+                    <div class="award-box">
+                        <i class="fa-regular fa-futbol"></i>
+                        <div class="award-info">
+                            <h5>Mid-NJ Flight Champions <span class="badge-hs">HS</span></h5>
+                            <p>Captained the Princeton FC Juventus soccer squad, leading the team to a championship victory through resilience and teamwork.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/sd1106" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/shreyanshdub/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shreydubey1106@gmail.com" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2026 Shreyansh Dubey.</p>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            const windowHeight = window.innerHeight;
+            
+            reveals.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 80) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", reveal);
+        reveal(); // Trigger on load
+    </script>
+</body>
+</html>
