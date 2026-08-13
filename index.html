@@ -192,6 +192,56 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
+        /* Publications Section */
+        .pub-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .pub-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 6px; height: 100%;
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+        }
+        .pub-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+        .pub-meta .tag { background: rgba(255, 209, 0, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; border: 1px solid var(--border); letter-spacing: 0.5px; text-transform: uppercase; }
+        .pub-card h3 { font-size: 1.6rem; margin-bottom: 8px; color: var(--text-main); }
+        .pub-authors { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 4px; }
+        .pub-affiliation { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px; font-style: italic; }
+        .pub-card h4 { color: var(--primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; margin: 20px 0 10px; }
+        .pub-card p { color: var(--text-muted); font-size: 0.98rem; }
+        .pub-keywords { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .pub-keywords span { background: rgba(255,255,255,0.05); color: var(--text-muted); padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.08); }
+        .pub-links { margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap; }
+        .pub-links a {
+            color: var(--bg-dark);
+            background: var(--primary);
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        .pub-links a:hover { box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px); }
+
+
         /* Skills Section */
         .skills-container { display: flex; flex-wrap: wrap; gap: 15px; margin-top: 20px; }
         .skill-item { background: var(--surface); border: 1px solid var(--border); padding: 12px 20px; border-radius: 8px; font-weight: 600; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
@@ -277,6 +327,7 @@
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#projects">Work</a>
+            <a href="#publications">Research</a>
             <a href="#skills">Skills</a>
             <a href="#milestones">Timeline</a>
         </div>
@@ -381,6 +432,37 @@
             </div>
         </div>
     </section>
+
+    <section id="publications">
+        <h2 class="reveal">Published <span class="highlight">Research</span></h2>
+
+        <div class="pub-card reveal">
+            <div class="pub-meta">
+                <span class="tag">Research Article</span>
+                <span class="badge-hs">HS</span>
+            </div>
+            <h3>AI in the South Brunswick Classroom: A Student-Centered Analysis</h3>
+            <p class="pub-authors">Shreyansh Dubey</p>
+            <p class="pub-affiliation">South Brunswick High School, South Brunswick School District, South Brunswick, United States</p>
+
+            <h4>Abstract</h4>
+            <p>To examine AI's impact and perceptions in education, I surveyed 668 students in the Class of 2026 at South Brunswick High School, gathering 400 responses to 10 multiple-choice questions administered via Google Forms on AI's impact on learning outcomes, familiarity, and ethics. After initial classroom outreach with humanities and English composition teachers yielded limited participation, I expanded data collection by approaching students during Next and organizing outreach outside of school, tracking responses digitally from September 2023 to April 2024. The resulting sample captured a diverse range of perspectives from a large share of the senior class, revealing largely positive student views on AI's promise to improve accessibility, drive personalization, and enable real-time feedback&mdash;while also surfacing significant concerns around inclusivity, ethnic and cultural diversity, data privacy, and algorithmic bias. Together, these findings underscore both the transformative potential of AI in education and the risks that arise without deliberate ethical oversight and inclusion, offering insights for policymakers, educators, and researchers working to build more effective and inclusive learning environments.</p>
+
+            <div class="pub-keywords">
+                <span>Artificial Intelligence</span>
+                <span>Data Analysis</span>
+                <span>Education</span>
+                <span>High School</span>
+                <span>Students</span>
+            </div>
+
+            <div class="pub-links">
+                <a href="AI_in_the_South_Brunswick_Classroom__A_Student-Centered_Analysis.pdf" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i> Read the Abstract (PDF)</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shreydubey1106@gmail.com"><i class="fa-solid fa-envelope"></i> Contact Author</a>
+            </div>
+        </div>
+    </section>
+
 
     <section id="skills" class="reveal">
         <h2>Technical <span class="highlight">Toolkit</span></h2>
