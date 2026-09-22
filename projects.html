@@ -11,26 +11,27 @@
     <meta property="og:url" content="https://sd1106.github.io/projects.html">
     <meta property="og:type" content="website">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&family=Fenix&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
     :root {
-        --bg-dark: #070707;
-        --bg-gradient: radial-gradient(circle at top left, #1f1b00, #070707 40%);
-        --surface: rgba(20, 20, 20, 0.7);
-        --surface-card: rgba(26, 26, 26, 0.6);
-        --primary: #FFD100;
-        --primary-glow: rgba(255, 209, 0, 0.4);
-        --text-main: #f8fafc;
-        --text-muted: #94a3b8;
-        --border: rgba(255, 209, 0, 0.15);
+        --bg-dark: #0a0a0a;
+        --bg-gradient: radial-gradient(circle at top left, #0c1c2e, #0a0a0a 40%);
+        --surface: rgba(28, 28, 28, 0.7);
+        --surface-card: #1c1c1c;
+        --primary: #16aaff;
+        --primary-glow: rgba(22, 170, 255, 0.4);
+        --text-main: #ffffff;
+        --text-muted: #a4a4a4;
+        --border: rgba(22, 170, 255, 0.18);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-        font-family: 'Inter', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         background: var(--bg-dark);
         background-image: var(--bg-gradient);
         color: var(--text-main);
@@ -50,14 +51,16 @@
         z-index: 1000;
         border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-weight: 800; font-size: 1.2rem; color: var(--text-main); text-decoration: none; }
+    .nav-logo { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 1.2rem; color: var(--text-main); text-decoration: none; }
     .nav-logo span { color: var(--primary); }
     .nav-links { display: flex; gap: 20px; }
     .nav-links a { color: var(--text-main); text-decoration: none; font-size: 0.9rem; font-weight: 600; transition: color 0.3s; }
     .nav-links a:hover { color: var(--primary); }
     .nav-links a.active { color: var(--primary); }
 
-    h1, h2, h3 { font-weight: 800; line-height: 1.2; }
+    h1, h2, h3 { font-family: 'Poppins', sans-serif; font-weight: 800; line-height: 1.2; }
+    body { font-family: 'Montserrat', sans-serif; }
+    .page-header p { font-family: 'Fenix', serif; }
     .highlight { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
 
     section { padding: 120px 4% 80px; max-width: 1400px; margin: 0 auto; position: relative; z-index: 1; }
@@ -78,7 +81,7 @@
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         border: 1px solid var(--border); position: relative;
         overflow: visible;
-        backdrop-filter: blur(5px); display: flex; flex-direction: column;
+        backdrop-filter: blur(5px); display: flex; flex-direction: row; align-items: stretch;
     }
     .panel::before {
         content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -90,17 +93,22 @@
     .panel:hover::before { opacity: 0.15; }
     .panel > * { position: relative; z-index: 1; }
 
-    /* Media block */
+    /* Media block: left column, matches the description column's height */
     .panel-media {
-        width: 100%;
-        aspect-ratio: 16 / 10;
+        width: 72%;
+        flex-shrink: 0;
+        aspect-ratio: auto;
+        align-self: stretch;
         background: #000;
         overflow: hidden;
         position: relative;
-        border-bottom: 1px solid var(--border);
+        border-bottom: none;
+        border-right: 1px solid var(--border);
         border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
+        border-bottom-left-radius: 15px;
+        border-top-right-radius: 0;
         user-select: none;
+        min-height: 480px;
     }
     .panel-media.is-placeholder {
         display: flex; align-items: center; justify-content: center;
@@ -150,24 +158,24 @@
     }
     .carousel-dot.active { background: var(--primary); width: 18px; border-radius: 4px; }
 
-    .panel-body { padding: 30px 40px 40px; display: flex; flex-direction: column; flex-grow: 1; }
-    .panel-icon { font-size: 2.2rem; margin-bottom: 18px; color: var(--primary); }
-    .panel h3 { font-size: 1.4rem; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .panel p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 18px; }
+    .panel-body { padding: 20px 22px; display: flex; flex-direction: column; flex-grow: 1; min-width: 0; justify-content: center; overflow: hidden; }
+    .panel-icon { font-size: 1.3rem; margin-bottom: 8px; color: var(--primary); }
+    .panel h3 { font-size: 1rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .panel p { color: var(--text-muted); font-size: 0.72rem; margin-bottom: 10px; line-height: 1.5; }
 
-    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
-    .tag { background: rgba(255, 209, 0, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; border: 1px solid var(--border); letter-spacing: 0.5px; text-transform: uppercase; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { background: rgba(22, 170, 255, 0.1); color: var(--primary); padding: 3px 9px; border-radius: 50px; font-size: 0.6rem; font-weight: 700; border: 1px solid var(--border); letter-spacing: 0.3px; text-transform: uppercase; }
 
-    .panel-learned { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
-    .panel-learned h4 { color: var(--primary); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 800; }
-    .panel-learned p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0; }
+    .panel-learned { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+    .panel-learned h4 { color: var(--primary); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: 800; }
+    .panel-learned p { color: var(--text-muted); font-size: 0.7rem; margin-bottom: 0; line-height: 1.5; }
 
-    .panel-links { margin-top: 20px; }
+    .panel-links { margin-top: 12px; }
     .panel-links a {
         color: var(--bg-dark); background: var(--primary);
-        padding: 9px 18px; border-radius: 8px; text-decoration: none;
-        font-weight: 700; font-size: 0.82rem; display: inline-flex;
-        align-items: center; gap: 8px; transition: all 0.3s ease;
+        padding: 6px 14px; border-radius: 8px; text-decoration: none;
+        font-weight: 700; font-size: 0.72rem; display: inline-flex;
+        align-items: center; gap: 6px; transition: all 0.3s ease;
     }
     .panel-links a:hover { box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px); }
 
@@ -182,6 +190,35 @@
     ::-webkit-scrollbar-track { background: var(--bg-dark); }
     ::-webkit-scrollbar-thumb { background: #333; border-radius: 6px; border: 3px solid var(--bg-dark); }
     ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+    /* Floating page nav (matches index.html) */
+    .side-rail { position: fixed; left: -2.4em; bottom: 0; z-index: 60; display: flex; flex-direction: column; align-items: center; gap: 2.5rem; padding-bottom: 3rem; }
+    .side-email a { writing-mode: vertical-rl; transform: rotate(180deg); color: var(--text-muted); font-family: 'Fenix', serif; font-size: 0.9rem; text-decoration: none; transition: color 0.3s; }
+    .side-email a:hover { color: var(--primary); }
+    .side-icons { display: flex; flex-direction: column; gap: 20px; }
+    .side-icons a { color: var(--text-muted); font-size: 1.15rem; transition: all 0.3s ease; }
+    .side-icons a:hover { color: var(--primary); transform: translateY(-3px); }
+    @media (max-width: 900px) { .side-rail { display: none; } }
+    @media (max-width: 800px) {
+        .panel { flex-direction: column; }
+        .panel-media {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            min-height: 0;
+            border-right: none;
+            border-bottom: 1px solid var(--border);
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            border-bottom-left-radius: 0;
+        }
+        .panel-body { padding: 18px 20px 22px; }
+    }
+
+    .page-select { display: flex; justify-content: center; gap: 60px; padding: 40px 5% 10px; }
+    .page-select a { display: flex; align-items: center; gap: 12px; color: var(--text-muted); text-decoration: none; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.1rem; transition: color 0.3s ease; }
+    .page-select a svg { width: 20px; height: 20px; transform: rotate(180deg); transition: transform 0.3s ease; }
+    .page-select a:hover, .page-select a.active { color: var(--primary); }
+    .page-select a:hover svg { transform: rotate(180deg) translateX(4px); }
     </style>
 </head>
 <body>
@@ -197,6 +234,14 @@
             <a href="index.html#milestones">Timeline</a>
         </div>
     </nav>
+
+    <div class="side-rail" aria-hidden="true">
+        <div class="side-email"><a href="mailto:shreydubey1106@gmail.com">shreydubey1106@gmail.com</a></div>
+        <div class="side-icons">
+            <a href="https://github.com/sd1106" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/shreyanshdub/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </div>
 
     <section class="page-header reveal">
         <h1>All <span class="highlight">Projects.</span></h1>
@@ -419,6 +464,11 @@
 
         </div>
     </section>
+
+    <div class="page-select">
+        <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg> Main</a>
+        <a href="projects.html" class="active">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+    </div>
 
     <footer>
         <div class="social-links">
