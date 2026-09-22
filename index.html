@@ -158,7 +158,7 @@
         /* Projects Grid */
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-top: 40px; }
         .project-card { 
-            background: var(--surface-card); border-radius: 16px; padding: 40px; 
+            background: var(--surface-card); border-radius: 16px; 
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
             border: 1px solid var(--border); position: relative; overflow: hidden;
             backdrop-filter: blur(5px); display: flex; flex-direction: column;
@@ -172,11 +172,59 @@
         .project-card:hover::before { opacity: 0.15; }
         
         .project-card > * { position: relative; z-index: 1; }
+
+        /* Media block (gif or short video) at the top of each card */
+        .project-media {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+        .project-media img,
+        .project-media video {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        /* Shown only if a card has no media yet - drop this element once you add real media */
+        .project-media.is-placeholder {
+            display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, rgba(255,209,0,0.06), rgba(0,0,0,0.4));
+        }
+        .project-media.is-placeholder i {
+            font-size: 2rem; color: var(--text-muted); opacity: 0.5;
+        }
+
+        .project-card-body { padding: 30px 40px 40px; display: flex; flex-direction: column; flex-grow: 1; }
         .project-icon { font-size: 2.5rem; margin-bottom: 20px; color: var(--primary); }
         .project-card h3 { font-size: 1.5rem; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .project-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; flex-grow: 1; }
+        .project-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
         
-        .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+
+        /* "What I learned" block */
+        .project-learned {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+        .project-learned h4 {
+            color: var(--primary); font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 800;
+        }
+        .project-learned p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0; }
+
+        /* GitHub / repo link button */
+        .project-links { margin-top: 20px; margin-bottom: 0; }
+        .project-links a {
+            color: var(--bg-dark); background: var(--primary);
+            padding: 9px 18px; border-radius: 8px; text-decoration: none;
+            font-weight: 700; font-size: 0.82rem; display: inline-flex;
+            align-items: center; gap: 8px; transition: all 0.3s ease;
+        }
+        .project-links a:hover { box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px); }
         .tag { background: rgba(255, 209, 0, 0.1); color: var(--primary); padding: 6px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; border: 1px solid var(--border); letter-spacing: 0.5px; text-transform: uppercase; }
 
         /* HS Badge Style */
@@ -327,6 +375,7 @@
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#projects">Work</a>
+            <a href="projects.html">Projects</a>
             <a href="#publications">Research</a>
             <a href="#skills">Skills</a>
             <a href="#milestones">Timeline</a>
@@ -363,71 +412,109 @@
         </div>
     </section>
 
-    <section id="about" class="split-content reveal">
-        <div class="split-text">
-            <h2>The "Other 6%"</h2>
-            <p>During my time building a highly accurate IT support chatbot, I realized something critical: building systems that work 94% of the time isn't enough. It's about what happens in the margins—the edge cases, the biases, the unexpected human elements.</p>
-            <p>This perspective was deeply shaped by my younger brother, Shreshth, who has experienced speech and cognitive delays since undergoing brain surgery at age one. For years, I sat beside him through dozens of  exercises and rigorous therapy programs, and learned that progress is anything but linear. It requires patience, constant iteration, and tools that mold to the user, not the other way around. I don't just want to build things that mostly work; I want to understand why they fail, fix them, and design human-centered technology that genuinely cares.</p>
-        </div>
-        <div class="visual-container" style="background: linear-gradient(135deg, var(--surface-card), rgba(0,0,0,0.8)); border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), inset 0 0 0 1px var(--border); display: flex; align-items: center; justify-content: center; min-height: 350px;">
-            <div style="text-align: center; color: var(--primary); font-weight: 600; padding: 40px;">
-                <i class="fa-solid fa-microchip" style="font-size: 4rem; margin-bottom: 20px; display: block; filter: drop-shadow(0 0 15px var(--primary-glow));"></i>
-                <span>Systems Architecture &amp; Empathy</span>
-            </div>
-        </div>
-    </section>
-
     <section id="projects">
         <h2 class="reveal">Applied <span class="highlight">Research &amp; Engineering</span></h2>
-        
+
+    
         <div class="projects-grid">
             <div class="project-card reveal">
-                <i class="fa-solid fa-robot project-icon"></i>
-                <h3>TriSys IT Services Chatbot <span class="badge-hs">HS</span></h3>
-                <p>Designed and deployed a production-grade AI chatbot to automate Tier-1 IT support integrated via Slack. Built a Flask-based REST API and fine-tuned the Gemini API on 100+ anonymized tickets, improving model accuracy from 70% to 95%.</p>
-                <div class="tags">
-                    <span class="tag">AI Software Engineer</span>
-                    <span class="tag">Under 2 Min Response Time</span>
+                <!-- Replace this placeholder with: <img src="trisys-demo.gif" alt="TriSys chatbot demo"> or a <video> (see comment below) -->
+                <div class="project-media is-placeholder"><i class="fa-solid fa-film"></i></div>
+                <div class="project-card-body">
+                    <i class="fa-solid fa-robot project-icon"></i>
+                    <h3>TriSys IT Services Chatbot <span class="badge-hs">HS</span></h3>
+                    <p>Designed and deployed a production-grade AI chatbot to automate Tier-1 IT support integrated via Slack. Built a Flask-based REST API and fine-tuned the Gemini API on 100+ anonymized tickets, improving model accuracy from 70% to 95%.</p>
+                    <div class="tags">
+                        <span class="tag">AI Software Engineer</span>
+                        <span class="tag">Under 2 Min Response Time</span>
+                    </div>
+                    <div class="project-learned">
+                        <h4>What I Learned</h4>
+                        <p><!-- TODO: 1-2 sentences on the key thing you learned building this --></p>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> View on GitHub</a>
+                    </div>
                 </div>
             </div>
 
             <div class="project-card reveal" style="transition-delay: 100ms;">
-                <i class="fa-solid fa-plane-up project-icon"></i>
-                <h3>MCCC Agricultural Drone <span class="badge-hs">HS</span></h3>
-                <p>Selected as 1 of 2 seniors to engineer a drone combatting blueberry scorch disease. Self-taught Fusion360 generative design to cut the frame weight by 65% (350g to 120g), drastically optimizing battery life.</p>
-                <div class="tags">
-                    <span class="tag">Hardware Optimization</span>
-                    <span class="tag">Fusion360</span>
+                <div class="project-media is-placeholder"><i class="fa-solid fa-film"></i></div>
+                <div class="project-card-body">
+                    <i class="fa-solid fa-plane-up project-icon"></i>
+                    <h3>MCCC Agricultural Drone <span class="badge-hs">HS</span></h3>
+                    <p>Selected as 1 of 2 seniors to engineer a drone combatting blueberry scorch disease. Self-taught Fusion360 generative design to cut the frame weight by 65% (350g to 120g), drastically optimizing battery life.</p>
+                    <div class="tags">
+                        <span class="tag">Hardware Optimization</span>
+                        <span class="tag">Fusion360</span>
+                    </div>
+                    <div class="project-learned">
+                        <h4>What I Learned</h4>
+                        <p><!-- TODO: 1-2 sentences on the key thing you learned building this --></p>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> View on GitHub</a>
+                    </div>
                 </div>
             </div>
 
             <div class="project-card reveal" style="transition-delay: 200ms;">
-                <i class="fa-solid fa-file-contract project-icon"></i>
-                <h3>AI &amp; Ethics Research <span class="badge-hs">HS</span></h3>
-                <p>Authored a research paper surveying 668 students on AI in education, mentored by Rutgers Prof. Sonal Pandey. Currently collaborating with Rutgers Prof. Govindaswamy to add econometrics and broaden the scope for undergraduate students.</p>
-                <div class="tags">
-                    <span class="tag">Lead Researcher</span>
-                    <span class="tag">Data Storytelling</span>
+                <div class="project-media is-placeholder"><i class="fa-solid fa-film"></i></div>
+                <div class="project-card-body">
+                    <i class="fa-solid fa-file-contract project-icon"></i>
+                    <h3>AI &amp; Ethics Research <span class="badge-hs">HS</span></h3>
+                    <p>Authored a research paper surveying 668 students on AI in education, mentored by Rutgers Prof. Sonal Pandey. Currently collaborating with Rutgers Prof. Govindaswamy to add econometrics and broaden the scope for undergraduate students.</p>
+                    <div class="tags">
+                        <span class="tag">Lead Researcher</span>
+                        <span class="tag">Data Storytelling</span>
+                    </div>
+                    <div class="project-learned">
+                        <h4>What I Learned</h4>
+                        <p><!-- TODO: 1-2 sentences on the key thing you learned building this --></p>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> View on GitHub</a>
+                    </div>
                 </div>
             </div>
 
             <div class="project-card reveal" style="transition-delay: 300ms;">
-                <i class="fa-solid fa-vr-cardboard project-icon"></i>
-                <h3>AnatomyVR &amp; Startups <span class="badge-hs">HS</span></h3>
-                <p>Collaborated with Prof. Wu at Mercer County Community College to integrate Gemini API conversational AI into a Unity VR tool for real-time student feedback. Co-founded Forge (LLM logistics startup) and SerenityVR (phobia treatment software).</p>
-                <div class="tags">
-                    <span class="tag">Unity VR</span>
-                    <span class="tag">Founder</span>
+                <div class="project-media is-placeholder"><i class="fa-solid fa-film"></i></div>
+                <div class="project-card-body">
+                    <i class="fa-solid fa-vr-cardboard project-icon"></i>
+                    <h3>AnatomyVR &amp; Startups <span class="badge-hs">HS</span></h3>
+                    <p>Collaborated with Prof. Wu at Mercer County Community College to integrate Gemini API conversational AI into a Unity VR tool for real-time student feedback. Co-founded Forge (LLM logistics startup) and SerenityVR (phobia treatment software).</p>
+                    <div class="tags">
+                        <span class="tag">Unity VR</span>
+                        <span class="tag">Founder</span>
+                    </div>
+                    <div class="project-learned">
+                        <h4>What I Learned</h4>
+                        <p><!-- TODO: 1-2 sentences on the key thing you learned building this --></p>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> View on GitHub</a>
+                    </div>
                 </div>
             </div>
             
             <div class="project-card reveal" style="transition-delay: 400ms;">
-                <i class="fa-solid fa-pen-nib project-icon"></i>
-                <h3>MotionShark UX Research <span class="badge-hs">HS</span></h3>
-                <p>Collaborated with UPenn Computer Science undergraduates to develop an AI-powered SAT prep platform. Provided critical product testing and UX feedback to align the platform with real student needs.</p>
-                <div class="tags">
-                    <span class="tag">UX Researcher</span>
-                    <span class="tag">EdTech</span>
+                <div class="project-media is-placeholder"><i class="fa-solid fa-film"></i></div>
+                <div class="project-card-body">
+                    <i class="fa-solid fa-pen-nib project-icon"></i>
+                    <h3>MotionShark UX Research <span class="badge-hs">HS</span></h3>
+                    <p>Collaborated with UPenn Computer Science undergraduates to develop an AI-powered SAT prep platform. Provided critical product testing and UX feedback to align the platform with real student needs.</p>
+                    <div class="tags">
+                        <span class="tag">UX Researcher</span>
+                        <span class="tag">EdTech</span>
+                    </div>
+                    <div class="project-learned">
+                        <h4>What I Learned</h4>
+                        <p><!-- TODO: 1-2 sentences on the key thing you learned building this --></p>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> View on GitHub</a>
+                    </div>
                 </div>
             </div>
         </div>
